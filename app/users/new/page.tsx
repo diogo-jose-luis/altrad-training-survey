@@ -1,16 +1,16 @@
 import Link from "next/link";
 import React from "react";
 
-const UserNew = () => {
+const DepartamentNew = () => {
   return (
     <div>
-      UserNew
+      DepartamentoNew
       <hr></hr>
       <Link href="/">Main Page</Link>
       <hr></hr>
-      <Link href="/users">Users</Link>
+      <Link href="/users">Departamentos</Link>
     </div>
   );
 };
 
-export default UserNew;
+export default DepartamentNew;

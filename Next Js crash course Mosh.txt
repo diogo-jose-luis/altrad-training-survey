@@ -34,6 +34,48 @@ CLIENT VS SERVER COMPONENT
 "components" diretory inside "app" is not publically accessible, that "components" diretory is a server-side diretory, so browser events on the react components inside there are not going to work, unless you use :
 'use client' //above the section where you place the imports in a component
 
+#############################################
+FETCHING DATA
+#############################################
+
+can create interface to represent models
+
+interface Departamento{
+    id:number;
+    designacao:string;
+    descricao:string;
+}
+
+const res = await fetch("http://127.0.0.1:8000/departamentos");
+const departamentos : Departamento[] = await res.json();
+
+Don´t need useEffect() or useState()
+
+#############################################
+CACHING
+#############################################
+
+We can get data from :
+- Memory
+- File System
+- Network
+
+gettting data from Memory is faster than File System and from File System is faster than from Network.
+
+Nextjs get data from File System ( cache ), so if you have a database wich can be frequentily updated with new data, you have to use no-store in cache in your fetch request like this below :
+
+const res = await fetch("http://127.0.0.1:8000/departamentos", {cache : 'no-store'});
+
+And the other alternative is to create  a period of time that data should be updated in that request like this below :
+const res = await fetch("http://127.0.0.1:8000/departamentos", {next : {revalidate : 10}});
+
+
+#############################################
+STATIC AND DYNAMIC RENDERING
+#############################################
+
+
+
 
 
 
