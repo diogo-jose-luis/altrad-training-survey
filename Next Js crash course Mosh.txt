@@ -74,11 +74,81 @@ const res = await fetch("http://127.0.0.1:8000/departamentos", {next : {revalida
 STATIC AND DYNAMIC RENDERING
 #############################################
 
+npm run build //build from production to static
+npm start //runs builded project generated from npm run build
+
+You can try build using :
+const res = await fetch("http://127.0.0.1:8000/departamentos", {next : {revalidate : 10}});
+to see if for instance a date time stamp is going to change whenever you refresh the page
+
+then you can try build using :
+const res = await fetch("http://127.0.0.1:8000/departamentos", {cache : 'no-store'});
+And you´ll see that date time stamp will change whenever you refresh the page
+
+Thats the diffrence between static and dynamic rendering the secret is using cahe : 'no-store' for dynamic rendering
 
 
+#############################################
+STYLING NEXTJS APPLICATION
+#############################################
 
+- Global style
+- CSS module
+- Tailwind CSS
+- DaisyUI ( the most popular component librarie for tailwind css)
 
+Reserve the globals.css file for style that are trully global is not a good pratice put there style related to specific components.
 
+Css files extension css must after .module, example name of file produtoEstilo.module.css instead of produtoEstilo.css
+
+For css files names dont use dash instead use the came or case method to define a combined name it is not a good pratice actually it is does not work, so instead of using .card-container use cardContainer
+
+https://daisyui.com/docs/install/
+npm i -D daisyui@latest
+
+And in tailwind.config.ts file add this :
+
+module.exports = {
+  //...
+  plugins: [
+    require('daisyui'),
+  ],
+}
+
+if you want to use themes in DaisyUI you add this code below plugins in tailwind.config.ts :
+
+daisyui: {
+    themes: ["light", "dark", "cupcake"],
+  },
+  
+  
+like this :
+
+module.exports = {
+  //...
+  plugins: [
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: ["light", "dark", "cupcake","winter"],
+  },
+}
+
+or just the theme you want like this :
+
+module.exports = {
+  //...
+  plugins: [
+    require('daisyui'),
+  ],
+  daisyui: {
+    themes: ["winter"],
+  },
+}
+
+and then add this property to html tag :
+
+<html data-theme="winter"></html> 
 
 
 

@@ -22,9 +22,23 @@ const DepartamentosPage = async () => {
       <Link href="/">Main Page</Link>
       <hr></hr>
       <>
-        <ul>
-            {departamentos?.map(departamento => <li key={departamento.id}>{departamento.designacao}</li> )}
-        </ul>
+        <table className="table table-bordered my-5">
+            <thead>
+                <tr>
+                    <th>Designação</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+            {departamentos?.map(departamento => 
+                <tr key={departamento.id}>
+                    <td>{departamento.designacao}</td>
+                    <td>{departamento.descricao}</td>
+                </tr>
+                 )}
+            </tbody>
+            
+        </table>
       </>
       <hr></hr>
       <Link href="/users/new">New departamento</Link>
