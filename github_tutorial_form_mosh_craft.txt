@@ -1,0 +1,286 @@
+git --version
+
+git config --global user.name "Diogo Luís"
+
+git config --global user.email diogo.luis.job@hotmail.com
+
+git config --global core.editor "code wait" //prompt open again after you close the code editor
+
+git config --global -e //see the configurations in editor
+
+git config --global core.autocrfl true | or in Mac = git config --global core.autocrfl input
+this is because of end of line from the diferente systems, in windows it is \n and \r, and in mac is different so the command above allow git to use the end of the line only when update.
+
+https://git-scm.com/docs/git-config
+
+git config --help
+
+git config -h
+
+download all the commands from the video in youtube.
+
+mkdir Moon
+
+cd Moon
+
+git init //To initialyze a git repository
+
+ls //see list of files and directories
+
+ls -a //
+
+open .git //open the repositorie of git or you may open by file explorer GUI
+
+NOTE : Git system before commits has a staging area ( index ) where files are added to review before make the commit and we do it by using "add" command, so if everything is good you can then use commit. But the system does not oblige that to commit you have to add first, it is just a recommended and secure way, you can commit without add.
+
+echo hello > file1.txt
+
+git status
+
+git add file1.txt
+git add file1.txt file2.txt
+git add *.txt
+git add .  //This add the entire diretory recursevily ( be carefull using this )
+
+echo world >> file1.txt //to append string word in the document file1
+
+git add file1.txt //You have to add again files you updated into the staging area afeter the aupdates
+
+git commit -m "Initial commit."
+
+Recommendation from Mosh but don´t need to take it as a rule, commit 5, 7 or 10 times a day.
+
+echo test >> file1.txt
+
+git commit -am "Fixed the bug that prevented the users from signing up."
+
+git commit -a -m "Fixed the bug that prevented the users from signing up."
+
+rm file2.txt //remove a file, it is not a git command it is just standard unix commnad
+
+git ls-files //to see the files in stating area
+
+git commit -m "Removed unsude code"
+
+git rm file2.txt | git rm *.txt //This code remove from both staging area and commit diretory
+
+mv file1.txt main.js //Unix command to change the name of a file 
+
+git mv main.js file1.js //renomear ficheiro
+
+git commit -m "Refactior code"
+
+mkdir logs
+
+echo hello > logs/dev.log
+
+echo logs/ > .gitignore //This is to prevent secret information from developer to be shared in repository
+
+if you add a diretory to staging area ( index ) and commit, and then add it to .gitignore file, git will still commint this file because it was already in index before you add it to gitignore, so you will have to delete it first from the staging area and then add it to .gitignore file back again.
+
+lets simulate a case :
+
+1º mkdir bin 
+
+2º echo hello > bin/app.bin
+
+3º git add .
+
+4º git commit -m "Added bin"
+
+5º git status 
+
+6º echo  bin/ >> .gitignore
+
+7º git status
+
+8º git add .
+
+9º git commit -m "Include Bin directory to gitignore"
+
+10º echo helloworld > bin/app.bin
+
+12º git ls-files 
+
+13º git status //It will keep saying that the file has been modified, showing that bin diretory are not ignored from staging area as it was suposse to be.
+
+14º git rm --cached -r bin/ //This will remove the bin directory from index ( staging area )
+
+15º git ls-files
+
+16º git commit -m "Removed the bin directory that was accidentally commited"
+
+Ended simulation
+
+NOTE : in github website there is a template of type of files that should be ignored for every type of programming language
+
+git status -s //shows the result in short descriptions
+
+for instance :
+
+echo sky >> file1.js
+
+echo sky > file2.js
+
+now use :
+git status and then git status -s to see the diference
+
+now add the file1 to staging area and check the status with -s again
+
+git add file1.js
+
+git status -s
+
+If you want to see the updates in the stage area prepared to be commited you use :
+git diff --staged
+
+And to see the difference between files in work directory and stage area we use :
+git diff
+
+DIFF VISUAL TOOLS
+
+- KDiff3
+- P4Merge
+- WinMerge ( windows only )
+- VSCode
+
+set vscode as default tool to see DIFF code
+git config --global diff.tool vscode //this is just a name
+now we define how it will launch vscode
+git config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"
+
+Now you can launch the visual tool for diff using this below :
+git difftool 
+git difftool --staged
+
+git log // it shows all the commits we´ve done so far
+
+git log --oneline //short summary of the commit
+
+git log --oneline --reverse //short summary of the commit in reverse order
+
+VIEWING A COMMIT
+
+git show "commit ID" //Dont need to complete the id digits if from the third or second digit it is diffrent from rest of commits ID"
+
+git show HEAD // that shows the first commit starting from the head accordinf to commits view order
+git show HEAD~1 //that shows the first commit after the head starting from the head accordinf to commits view order
+git show HEAD~2 //that shows the second commit after the head starting from the head accordinf to commits view order
+git show HEAD~2 //that shows the third commit after the head starting from the head accordinf to commits view order
+Ans so on
+
+If you want to see just an specif file in commit 
+git show HEAD~1:.gitignore
+git show HEAD~1:bin/app.bin
+
+To view files affected in a commit 
+git ls-tree HEAD~1
+
+in you want to see the file content in a specific commit get the ID generated in the commit for that specific file
+git show 519126
+git show 64229
+
+GIT OBJECTS
+- commits
+- Blobs ( Files )
+- Trees ( Directories )
+- Tags
+
+UNSTAGING FILES RESTORE
+
+if you want restore last commit to staged area to a certain file in stage area, use this :
+git restore --staged file1.js 
+git status -s
+git restore --staged file2.js
+git status -s
+
+DISCARDING LOCAL CHANGES
+
+git restore . //discard all
+git restore file1.js //discard just file1
+
+if a file updated was not in stage area even if you restore all the from staged to local directory in won´t affect that file, to force restore it back even that file that was not in staged area you use that below :
+
+git clean -fd
+
+RESTORING A FILE TO AN EARLIER VERSION
+
+git rm file1.js
+git status -s
+git commit -m "Deleted file1.js"
+
+restoring...
+1º git log --oneline //to check the order of commits so that you know how far it is from HEAD
+2º git restore --source=HEAD~1 file1.js
+
+
+
+*********************************************************
+Connect your project to a repository on your github account from vscode
+*********************************************************
+
+Don´t forget first to login with your github account in vscode editor accounts, some commands won work on windows propmt so if you have Git bash prompt will be easier  
+
+git remote add origin git@github.com:diogo-jose-luis/nextjs-mosh-crash-course.git
+git branch -M main
+
+if problem beacuse of conection to your account, using Git bash prompt
+
+ssh-keygen -t ed25519 -C diogo.luis.job@hotmail.com
+
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_ed25519
+
+3. Adicione a chave pública ao GitHub
+   Copie a chave pública para o clipboard:
+
+cat ~/.ssh/id_ed25519.pub
+
+Vá para Configurações de SSH no GitHub.
+https://github.com/settings/keys
+Clique em New SSH Key.
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXCQPXlFKdSoglWiY/t2YoltbRfpD3uK7JVOR0MX71Z diogo.luis.job@hotmail.com
+
+    Cole o conteúdo copiado e salve.
+
+4. Teste a conexão com o GitHub
+
+Certifique-se de que a configuração está correta:
+
+ssh -T git@github.com
+
+Deve aparecer uma mensagem como:
+
+Hi <seu-usuário>! You've successfully authenticated, but GitHub does not provide shell access.
+
+Adicione os arquivos ao controle de versão:
+
+git add . //se der erro adicione como umrepositorio seguro com o comando abaixo
+git config --global --add safe.directory C:/react-projects/nextjs-mosh-crash-course
+
+Crie um commit:
+
+git commit -m "Initial commit"
+
+Envie os arquivos para o GitHub:
+
+git push -u origin main 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
