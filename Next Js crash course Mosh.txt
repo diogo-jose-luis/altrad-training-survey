@@ -1,0 +1,8 @@
+
+npx create-next-app@13.4
+
+//The above command is just to specify the version, but you run only npx create-next-app if you want the last version
+
+npx create-next-app@13.4 . //add dot in front of the command if you want to install it in the current directory
+
+

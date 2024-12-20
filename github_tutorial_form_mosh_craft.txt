@@ -219,6 +219,8 @@ restoring...
 Connect your project to a repository on your github account from vscode
 *********************************************************
 
+NOTE : fisrt setup and install your project dependecies then add to your repository
+
 Don´t forget first to login with your github account in vscode editor accounts, some commands won work on windows propmt so if you have Git bash prompt will be easier  
 
 git remote remove origin // to remove a previous origin
@@ -271,6 +273,7 @@ Envie os arquivos para o GitHub:
 git push -u origin main 
 
 git pull //executed when in remote repository as new files you dont have in local directory
+
 
 
 
