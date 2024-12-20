@@ -1,8 +1,33 @@
 
+VERCEL is the company that created nextjs
+
 npx create-next-app@13.4
+npx create-next-app@latest
 
 //The above command is just to specify the version, but you run only npx create-next-app if you want the last version
 
 npx create-next-app@13.4 . //add dot in front of the command if you want to install it in the current directory
+
+npm run dev //to run the app
+
+#############################################
+PROJECT STRUTURE
+#############################################
+
+in root the "app" directory in the container for routing system, in nextjs route is based in file system.
+
+
+#############################################
+ROUTING AND NAVIGATION
+#############################################
+
+When you create a new folder in "app" directory has it is going to be automacally a name of a route for the convetion nextjs says that the file inside that folder must be named "page.tsx"
+
+The name of component in file "page.tsx" doesnt really have to be the same as the name of file, you can put something more meaningfull to what the component represents.
+
+rafce // is the shortcut to create a quick component
+
+
+
 
 

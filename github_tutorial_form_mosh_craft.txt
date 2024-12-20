@@ -266,7 +266,7 @@ git config --global --add safe.directory C:/react-projects/nextjs-mosh-crash-cou
 
 Crie um commit:
 
-git commit -m "Initial commit"
+git commit -m "Git draft file updated"
 
 Envie os arquivos para o GitHub:
 
