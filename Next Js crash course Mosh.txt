@@ -27,6 +27,19 @@ The name of component in file "page.tsx" doesnt really have to be the same as th
 
 rafce // is the shortcut to create a quick component
 
+#############################################
+CLIENT VS SERVER COMPONENT
+#############################################
+
+"components" diretory inside "app" is not publically accessible, that "components" diretory is a server-side diretory, so browser events on the react components inside there are not going to work, unless you use :
+'use client' //above the section where you place the imports in a component
+
+
+
+
+
+
+
 
 
 

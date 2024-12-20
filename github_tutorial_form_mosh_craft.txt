@@ -245,7 +245,7 @@ Vá para Configurações de SSH no GitHub.
 https://github.com/settings/keys
 Clique em New SSH Key.
 
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXCQPXlFKdSoglWiY/t2YoltbRfpD3uK7JVOR0MX71Z diogo.luis.job@hotmail.com
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9FjWefXvnvcc22+ZKLrBnCAU0jlVFWHtIUU2dPPm/5 diogo.luis.job@hotmail.com
 
     Cole o conteúdo copiado e salve.
 
