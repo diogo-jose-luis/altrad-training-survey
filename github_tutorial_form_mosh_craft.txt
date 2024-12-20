@@ -270,7 +270,7 @@ Envie os arquivos para o GitHub:
 
 git push -u origin main 
 
-
+git pull //executed when in remote repository as new files you dont have in local directory
 
 
 
