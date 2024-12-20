@@ -221,7 +221,9 @@ Connect your project to a repository on your github account from vscode
 
 Don´t forget first to login with your github account in vscode editor accounts, some commands won work on windows propmt so if you have Git bash prompt will be easier  
 
-git remote add origin git@github.com:diogo-jose-luis/nextjs-mosh-crash-course.git
+git remote remove origin // to remove a previous origin
+
+git remote add origin git@github.com:diogo-jose-luis/nextjs-fundamentals.git
 git branch -M main
 
 if problem beacuse of conection to your account, using Git bash prompt
