@@ -8,6 +8,8 @@ export default function Home() {
       <h1>Hello World</h1>
       <hr></hr>
       <Link href="/users">departamentos</Link>
+      <Link href="/products?sortOrder=designacao">Produtos ( sortOrder )</Link>
+      <Link href="/admin">Admin Page</Link>
       <hr></hr>
       <ProductCard />
     </main>

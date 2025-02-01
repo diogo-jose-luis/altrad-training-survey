@@ -150,6 +150,8 @@ and then add this property to html tag :
 
 <html data-theme="winter"></html> 
 
+npm i fast-sort
+
 
 
 
