@@ -1,23 +1,34 @@
 import DepartmentTable from "@/app/components/DepartamentTable";
 import Link from "next/link";
-import React from "react";
-
+import React, { Suspense } from "react";
 
 interface Props {
   params: { slug: string[] };
-  searchParams : { sortOrder : string }
+  searchParams: { sortOrder: string };
 }
 
-const ProductPage = ({ params: { slug }, searchParams:{sortOrder} }: Props) => {
-
+const ProductPage = ({
+  params: { slug },
+  searchParams: { sortOrder },
+}: Props) => {
   return (
     <div>
-      <h1>ProductPage slugs - {slug} - {sortOrder}</h1>
+      <h1>
+        ProductPage slugs - {slug} - {sortOrder}
+      </h1>
       <hr></hr>
-      <Link href="/" className="mr-2">Main Page</Link>
-      <Link href="/users/new" className="btn btn-primary">New Departament</Link>
+      <Link href="/" className="mr-2">
+        Main Page
+      </Link>
+      <Link href="/users/new" className="btn btn-primary">
+        New Departament
+      </Link>
       <hr></hr>
-      <DepartmentTable sortOrder={sortOrder} />
+
+      <Suspense fallback={<p>Loading...</p>}>
+        <DepartmentTable sortOrder={sortOrder} />
+      </Suspense>
+
       <hr></hr>
       <Link href="/users/new">New departamento</Link>
     </div>

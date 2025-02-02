@@ -9,7 +9,7 @@ interface Departamento {
 
 const UserTable = async () => {
 
-    const res = await fetch("http://127.0.0.1:8000/departamentos", {
+    const res = await fetch("http://127.0.0.1:8000/xdepartamentos", {
         cache: "no-store",
       });
       const departamentos: Departamento[] = await res.json();

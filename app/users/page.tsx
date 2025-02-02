@@ -16,9 +16,7 @@ const DepartamentosPage = async () => {
       <hr></hr>
       <Link href="/users/new">New departamento</Link>
 
-      <hr className="mb-5"></hr>
-
-      <button className="btn btn-primary">Create</button>
+     
 
     </div>
   );
