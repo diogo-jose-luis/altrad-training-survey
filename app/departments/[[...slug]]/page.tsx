@@ -13,7 +13,7 @@ const DepartmentsPage = ({ params: { slug } }: Props) => {
       <hr></hr>
       <Link href="/">Main Page</Link>
       <hr></hr>
-      <DepartmentTable />
+      <DepartmentTable sortOrder="" />
       <hr></hr>
       <Link href="/users/new">New departamento</Link>
     </div>

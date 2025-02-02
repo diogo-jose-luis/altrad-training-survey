@@ -14,7 +14,8 @@ const ProductPage = ({ params: { slug }, searchParams:{sortOrder} }: Props) => {
     <div>
       <h1>ProductPage slugs - {slug} - {sortOrder}</h1>
       <hr></hr>
-      <Link href="/">Main Page</Link>
+      <Link href="/" className="mr-2">Main Page</Link>
+      <Link href="/users/new" className="btn btn-primary">New Departament</Link>
       <hr></hr>
       <DepartmentTable sortOrder={sortOrder} />
       <hr></hr>
