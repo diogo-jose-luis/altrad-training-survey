@@ -152,7 +152,25 @@ and then add this property to html tag :
 
 npm i fast-sort
 
+npm i zod ( request validation librarie )
 
+npm i prisma ( ORM its like laravel arstisan )
+
+npx prisma ( help commands instrution for prisma usage )
+
+npx prisma init
+
+npx prisma format
+
+npx prisma migrate dev | for non relational DB use npx prisma push
+
+npm i next-cloudinary
+
+next-auth.js.org
+
+npm install next-auth
+
+openssl rand -base64 32 // ssl tool to generate a random sequence of bytes
 
 
 
