@@ -172,6 +172,41 @@ npm install next-auth
 
 openssl rand -base64 32 // ssl tool to generate a random sequence of bytes
 
+npm i @next-auth/prisma-adapter
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  followers    Int      @default(0)
+  isActive     Boolean  @default(true)
+  registeredAt DateTime @default(now())
+}
+
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price Float
+}
+
+
+npm i bcrypt
+npm i -D @types/bcrypt
+
+npm install react-hook-form zod @hookform/resolvers
+
+
+react.email
+
+npm i react-email @react-email/components
+
+npm run preview-email 
+
+npm i lodash
+
+npm i -D @types/lodash
+
+
 
 
 

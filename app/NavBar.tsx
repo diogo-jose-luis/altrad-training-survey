@@ -47,9 +47,15 @@ const NavBar = () => {
       )}
 
       {status === "unauthenticated" && (
-        <Link href="/api/auth/signin" className="text-black">
+        <>
+        <Link href="/api/auth/signin" className="text-black mr-1">
           | Login with Google Account
         </Link>
+
+        <Link href="/register" className="text-black">
+          | Register
+        </Link>
+        </>
       )}
     </div>
   );
