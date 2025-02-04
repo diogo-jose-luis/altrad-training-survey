@@ -207,6 +207,7 @@ npm i lodash
 npm i -D @types/lodash
 
 
+npm i -D encoding // important command for when uploading project to versel
 
 
 
