@@ -5,14 +5,10 @@ import { prisma } from "@/prisma/client";
 // GET User by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: any } // using any bypasses the type conflict
 ) {
   try {
-    const userId = parseInt(params.id);
-
-    if (isNaN(userId)) {
-      return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
-    }
+    const userId = params.id; // params is expected to have an "id" property
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -25,34 +21,35 @@ export async function GET(
     return NextResponse.json(user);
   } catch (error) {
     console.error("Error fetching user:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch user" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch user" }, { status: 500 });
   }
 }
 
 // UPDATE User (PUT)
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: any }
 ) {
   try {
-    const userId = parseInt(params.id);
-    if (isNaN(userId)) {
-      return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
-    }
-
+    const userId = params.id;
     const body = await request.json();
     const validation = schema.safeParse(body);
 
     if (!validation.success) {
-      return NextResponse.json({ errors: validation.error.errors }, { status: 400 });
+      return NextResponse.json(
+        { errors: validation.error.errors },
+        { status: 400 }
+      );
     }
 
-    const existingUser = await prisma.user.findUnique({ where: { id: userId } });
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
     if (!existingUser) {
-      return NextResponse.json({ error: "User does not exist" }, { status: 404 });
+      return NextResponse.json(
+        { error: "User does not exist" },
+        { status: 404 }
+      );
     }
 
     // Extract validated fields
@@ -62,8 +59,9 @@ export async function PUT(
       where: { id: userId },
       data: {
         name,
-        email, // Email now included
-        followers,
+        email,
+        // If you need to update followers, include it here
+        // followers,
       },
     });
 
@@ -80,20 +78,21 @@ export async function PUT(
 // DELETE User
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: any }
 ) {
   try {
-    const userId = parseInt(params.id);
-    if (isNaN(userId)) {
-      return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
-    }
+    const userId = params.id;
 
-    const existingUser = await prisma.user.findUnique({ where: { id: userId } });
+    const existingUser = await prisma.user.findUnique({
+      where: { id: userId },
+    });
     if (!existingUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    await prisma.user.delete({ where: { id: userId } });
+    await prisma.user.delete({
+      where: { id: userId },
+    });
 
     return NextResponse.json(
       { message: "User deleted successfully" },

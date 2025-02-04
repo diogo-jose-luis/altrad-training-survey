@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 
 import gloves from "@/public/images/image1.png";
 import { Metadata } from "next";
