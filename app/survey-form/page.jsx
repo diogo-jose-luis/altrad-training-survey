@@ -110,7 +110,7 @@ export default function WizardSurveyPage() {
     <div className="relative h-screen w-full font-sans">
       <div className="flex flex-col lg:flex-row h-full w-full font-sans">
         <div className="w-full lg:w-[30%] relative h-64 lg:h-auto">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0"> 
             <Image
               src={bg1}
               alt="Background"
