@@ -4,6 +4,8 @@ VERCEL is the company that created nextjs
 npx create-next-app@13.4
 npx create-next-app@latest
 
+npx next --version
+
 //The above command is just to specify the version, but you run only npx create-next-app if you want the last version
 
 npx create-next-app@13.4 . //add dot in front of the command if you want to install it in the current directory
@@ -206,9 +208,56 @@ npm i lodash
 
 npm i -D @types/lodash
 
-
 npm i -D encoding // important command for when uploading project to versel
 
+npm install --save react-simplemde-editor easymde
 
+npm install @radix-ui/themes
 
+npm i react-hook-form@7.46.1
+
+npm install react-hot-toast
+
+npm install react-toastify
+
+npm i @hookform/resolvers@3.3.1
+
+npm i delay
+
+npm i react-loading-skeleton@3.3.1
+
+npm i react-markdown@8.0.1
+import ReactMarkdown from 'react-markdown';
+
+<Card className="prose">
+  <ReactMarkDown>Text here...</ReactMarkDown>
+</Card>
+
+npm install -D @tailwindcss/typography
+
+then in tailwind configuration file add this :
+
+module.exports = {
+  theme : {
+    //...
+  },
+  plugins : [
+    require('@tailwindcss/typography'),
+    //...
+  ]
+}
+
+npm i @radix-ui/react-icons
+
+import {Pencil2Icon} from '@radix-ui/react-icons'
+
+npm install @radix-ui/react-alert-dialog
+
+TansTack Query
+npm i @tanstack/react-query@4.35.3 
+
+React toast
+npm i react-hot-toast@2.4.1
+
+sentry.io
 

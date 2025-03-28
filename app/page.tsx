@@ -1,77 +1,64 @@
 "use client";
-
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ProductCard from "./components/ProductCard";
-import { getServerSession } from "next-auth";
 
-import gloves from "@/public/images/image1.png";
-import { Metadata } from "next";
-import { useState } from "react";
+import bg1 from "@/assets/images/bg2.jpg";
+import logo from "@/assets/images/logo.jpg";
 
-import dynamic from "next/dynamic";
+export default function SurveyHomePage() {
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
 
-const HeavyComponent = dynamic(() => import("./components/HeavyComponent"));
-
-export default function Home() {
-  const session = null;
-  //const session = await getServerSession(authOptions);
-
-  const [isVisible, setVisible] = useState(false);
+  useEffect(() => {
+    const submitted = localStorage.getItem("survey_submitted");
+    if (submitted === "true") {
+      setAlreadySubmitted(true);
+    }
+  }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 relative h-screen">
-      {/* <h1>{session && <span>{session.user!.name}</span>}</h1> */}
-
-      <h1>Removed session user</h1>
-      <hr></hr>
-
-      <Link href="/users" className="font-poppins">
-        departamentos
-      </Link>
-      <Link href="/products?sortOrder=designacao">Produtos ( sortOrder )</Link>
-      <Link href="/admin">Admin Page</Link>
-      <Link href="/upload">Upload Files Page</Link>
-      <Link href="/api/users">API users</Link>
-
-      <hr></hr>
-
-      <h1>Heavy component for lazyload</h1>
-      <button className="btn btn-secondary" onClick={() => setVisible(true)}>
-        Click to show
-      </button>
-      {isVisible && <HeavyComponent />}
-      <hr></hr>
-      <hr></hr>
-
-      <h1>Lodash heavy and nice librarie</h1>
-      <button
-        className="btn btn-secondary"
-        onClick={async () => {
-          const _ = (await import("lodash")).default;
-          const users = [{ name: "c" }, { name: "b" }, { name: "a" }];
-          const sortedArray = _.orderBy(users, ['name']);
-          console.log(sortedArray);
-        }}
-      >
-        Use Lodash see in console log
-      </button>
-      <hr></hr>
-      <h1>Images</h1>
-      {/* <Image src={gloves} alt="luvas" /> */}
-      {/* <div className="h-8">
+    <div className="relative h-screen w-full font-sans">
+      {/* Background */}
+      <div className="absolute inset-0">
         <Image
-          src="https://bit.ly/react-cover"
-          alt="luvas"
-          fill
-          className="object-cover"
-          sizes="(max-width:480px) 100vw, (max-width:768px) 50vw, 33vw"
-          quality={100}
-          priority
+          src={bg1}
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
         />
-      </div> */}
-      <hr></hr>
-      <ProductCard />
-    </main>
+        <div
+          className="absolute inset-0 z-10"
+          style={{ backgroundColor: "#E20612", opacity: 0.5 }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center text-white px-6 sm:px-10 md:px-20 lg:px-40">
+        <Image src={logo} alt="Logo" width={70} height={70} className="mb-6" />
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-snug">
+          Welcome to the Training Leadership Feedback Survey
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl max-w-2xl mb-10">
+          Your opinion matters. This quick survey helps us improve future
+          training sessions and ensures we meet your leadership development
+          needs.
+        </p>
+
+        {alreadySubmitted ? (
+          <p className="bg-white text-[#E20612] px-6 py-4 rounded-md text-base sm:text-lg font-semibold shadow-lg">
+            You have already submitted the survey. Thank you!
+          </p>
+        ) : (
+          <Link
+            href="/survey-form"
+            className="px-6 sm:px-8 py-3 sm:py-4 rounded-md text-white text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+            style={{ backgroundColor: "#E20612" }}
+          >
+            Start Survey →
+          </Link>
+        )}
+      </div>
+    </div>
   );
 }
