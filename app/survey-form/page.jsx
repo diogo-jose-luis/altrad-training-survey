@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import bg1 from "@/assets/images/bg2.jpg";
+import bg1 from "@/assets/images/bg3.jpg";
 import logo from "@/assets/images/logo.jpg";
 import not_bad from "@/assets/images/not_bad.png";
 import adorable from "@/assets/images/adorable.png";
@@ -20,62 +20,76 @@ const questions = [
   {
     type: 1,
     step: 2,
-    title: "Was the content relevant to your leadership role?",
+    title: "Was the training clear and easy to understand ?",
     description: "Evaluate how the topics connect to your daily challenges.",
-    answers: ["Not at all", "Somewhat", "Very relevant"],
+    answers: ["Not at all", "Somewhat", "Very clear"],
   },
   {
     type: 1,
     step: 3,
+    title: "Has your perspective on managing or working with your team change after the training ?",
+    description: "Evaluate how the topics connect to your daily challenges.",
+    answers: ["Not at all", "Somewhat", "Very Helpfull"],
+  },
+  {
+    type: 1,
+    step: 4,
     title: "Did you feel engaged throughout the session?",
     description: "Consider your attention and involvement level.",
     answers: ["Rarely", "Mostly", "Fully engaged"],
   },
   {
     type: 1,
-    step: 4,
+    step: 5,
     title: "How comfortable were you sharing your thoughts?",
     description: "Think about how safe and supported you felt.",
     answers: ["Not comfortable", "Somewhat comfortable", "Very comfortable"],
   },
   {
     type: 1,
-    step: 5,
+    step: 6,
     title: "How would you describe the trainer's delivery?",
     description: "Focus on clarity, energy, and connection.",
     answers: ["Unclear", "Clear", "Very engaging"],
   },
   {
     type: 1,
-    step: 6,
+    step: 7,
     title: "How did you find the session’s pace?",
     description: "Was it too fast, too slow, or just right?",
     answers: ["Too slow", "Just right", "Too fast"],
   },
   {
     type: 1,
-    step: 7,
+    step: 8,
     title: "How effective was the group interaction?",
     description: "Think about the exchange of ideas and participation.",
     answers: ["Low", "Moderate", "High"],
   },
   {
     type: 1,
-    step: 8,
+    step: 9,
     title: "Would you attend another training like this?",
     description: "Your interest in similar future sessions.",
     answers: ["No", "Maybe", "Yes"],
   },
   {
+    type: 3,
+    step: 10,
+    title: "What topics would you like to see covered in future trainings?",
+    description: "Your interest in similar future sessions.",
+    answers: ["Comment", "Comment", "Comment"],
+  },
+  {
     type: 1,
-    step: 9,
+    step: 11,
     title: "Would you recommend this training to others?",
     description: "Share if you'd suggest this to fellow leaders.",
     answers: ["No", "Yes"],
   },
   {
     type: 1,
-    step: 10,
+    step: 12,
     title: "What best describes your post-session feeling?",
     description: "Summarize your overall sentiment now.",
     answers: ["Neutral", "Motivated", "Inspired"],
@@ -88,6 +102,7 @@ export default function WizardSurveyPage() {
 
   const [completed, setCompleted] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [textAnswer, setTextAnswer] = useState("");
   const [userAnswers, setUserAnswers] = useState([]);
   const [showWarning, setShowWarning] = useState(false);
 
@@ -95,16 +110,18 @@ export default function WizardSurveyPage() {
     const existing = userAnswers.find((a) => a.step === question.step);
     if (existing) {
       setSelectedOption(existing.answer);
+      setTextAnswer(existing.text || "");
     } else {
       setSelectedOption(null);
+      setTextAnswer("");
     }
   }, [currentStep]);
 
   const allAnswered = questions.every((q) =>
-    userAnswers.some((a) => a.step === q.step && a.answer != null)
+    userAnswers.some((a) => a.step === q.step && (a.answer != null || a.text))
   );
 
-  const answeredCount = userAnswers.filter((a) => a.answer != null).length;
+  const answeredCount = userAnswers.filter((a) => a.answer != null || a.text).length;
 
   return (
     <div className="relative h-screen w-full font-sans">
@@ -252,6 +269,29 @@ export default function WizardSurveyPage() {
                         </label>
                       );
                     })}
+                  </div>
+                ) : question.type === 3 ? (
+                  <div className="mb-6">
+                    <textarea
+                      className="w-full p-4 border rounded-md"
+                      rows={5}
+                      placeholder="Type your suggestions here..."
+                      value={textAnswer}
+                      onChange={(e) => {
+                        setTextAnswer(e.target.value);
+                        setSelectedOption(1);
+                        setUserAnswers((prev) => {
+                          const existing = prev.find((a) => a.step === question.step);
+                          if (existing) {
+                            return prev.map((a) =>
+                              a.step === question.step ? { ...a, answer: 1, text: e.target.value } : a
+                            );
+                          } else {
+                            return [...prev, { step: question.step, answer: 1, text: e.target.value }];
+                          }
+                        });
+                      }}
+                    />
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
