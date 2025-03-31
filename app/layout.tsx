@@ -38,7 +38,7 @@ export default function RootLayout({
         {/* <AuthProvider> */}
         {/* <NavBar /> */}
         {/* <Suspense fallback={<p>Loading..</p>}> */}
-        <main className="p-0">{children}</main>
+        <main className="p-0 h-screen">{children}</main>
         {/* </Suspense> */}
         {/* </AuthProvider> */}
       </body>

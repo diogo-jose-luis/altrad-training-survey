@@ -10,7 +10,7 @@ export default function SurveyHomePage() {
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
 
   useEffect(() => {
-    const submitted = localStorage.getItem("survey_submitted");
+    const submitted = localStorage.getItem("altrad_survey_training");
     if (submitted === "true") {
       setAlreadySubmitted(true);
     }
