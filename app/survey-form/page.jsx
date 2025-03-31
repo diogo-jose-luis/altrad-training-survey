@@ -45,7 +45,7 @@ export default function WizardSurveyPage() {
 
   useEffect(() => {
     if (!question) return;
-    const existing = userAnswers.find((a) => a.pergunta_id === question.id);
+    const existing = userAnswers.find((a) => a.pergunta_id == question.id);
     if (existing) {
       setSelectedOption(existing.resposta_id);
       setTextAnswer(existing.text || "");
@@ -57,7 +57,7 @@ export default function WizardSurveyPage() {
 
   const allAnswered = questions.every((q) =>
     userAnswers.some(
-      (a) => a.pergunta_id === q.id && (a.resposta_id != null || a.text)
+      (a) => a.pergunta_id == q.id && (a.resposta_id != null || a.text)
     )
   );
 
@@ -65,7 +65,7 @@ export default function WizardSurveyPage() {
     (a) => a.resposta_id != null || a.text
   ).length;
 
-  if (questions.length === 0) {
+  if (questions.length == 0) {
     return <p className="p-10 text-gray-500">A carregar perguntas...</p>;
   }
 
@@ -93,7 +93,7 @@ export default function WizardSurveyPage() {
                 |
                 <div
                   className={`w-5 h-5 flex items-center justify-center rounded-full border-2 p-3 ${
-                    idx === currentStep
+                    idx == currentStep
                       ? "border-white text-white"
                       : "border-gray-300 text-white"
                   }`}
@@ -171,10 +171,10 @@ export default function WizardSurveyPage() {
                   {question.description}
                 </p>
 
-                {question.type === 1 ? (
+                {question.type == 1 ? (
                   <div className="space-y-4">
                     {question.answers.map((answer, index) => {
-                      const isSelected = selectedOption === answer.id;
+                      const isSelected = selectedOption == answer.id;
 
                       return (
                         <label
@@ -188,11 +188,11 @@ export default function WizardSurveyPage() {
                             setSelectedOption(answer.id);
                             setUserAnswers((prev) => {
                               const existing = prev.find(
-                                (a) => a.pergunta_id === question.id
+                                (a) => a.pergunta_id == question.id
                               );
                               if (existing) {
                                 return prev.map((a) =>
-                                  a.pergunta_id === question.id
+                                  a.pergunta_id == question.id
                                     ? {
                                         ...a,
                                         resposta_id: answer.id,
@@ -227,7 +227,7 @@ export default function WizardSurveyPage() {
                       );
                     })}
                   </div>
-                ) : question.type === 3 ? (
+                ) : question.type == 3 ? (
                   <div className="mb-6">
                     <textarea
                       className="w-full p-4 border rounded-md"
@@ -240,11 +240,11 @@ export default function WizardSurveyPage() {
                         setUserAnswers((prev) => {
                           const resposta_id = question.answers[0]?.id || 1;
                           const existing = prev.find(
-                            (a) => a.pergunta_id === question.id
+                            (a) => a.pergunta_id == question.id
                           );
                           if (existing) {
                             return prev.map((a) =>
-                              a.pergunta_id === question.id
+                              a.pergunta_id == question.id
                                 ? { ...a, resposta_id, text: e.target.value }
                                 : a
                             );
