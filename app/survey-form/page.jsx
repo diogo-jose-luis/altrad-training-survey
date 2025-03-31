@@ -55,6 +55,8 @@ export default function WizardSurveyPage() {
     }
   }, [currentStep, question]);
 
+  const [loading, setLoading] = useState(false);
+
   const allAnswered = questions.every((q) =>
     userAnswers.some(
       (a) => a.pergunta_id == q.id && (a.resposta_id != null || a.text)
@@ -291,34 +293,49 @@ export default function WizardSurveyPage() {
                   </button>
                 ) : (
                   <button
-                    className="text-white px-6 py-3 rounded-md disabled:opacity-50"
+                    className="text-white px-6 py-3 rounded-md disabled:opacity-50 flex items-center justify-center gap-2"
                     style={{ backgroundColor: "#E20612" }}
-                    disabled={!allAnswered}
+                    disabled={!allAnswered || loading}
                     onClick={() => {
                       if (!allAnswered) {
                         setShowWarning(true);
                         return;
                       }
 
+                      setLoading(true);
+
                       axios
-                        .post("https://admin.hrl.ao/api/submissao-survey-respostas", {
-                          respostas: userAnswers,
-                        })
+                        .post(
+                          "https://admin.hrl.ao/api/submissao-survey-respostas",
+                          {
+                            respostas: userAnswers,
+                          }
+                        )
                         .then((res) => {
                           console.log(
                             "Respostas enviadas com sucesso!",
                             res.data
                           );
-                          localStorage.setItem("altrad_survey_training", "true");
+                          localStorage.setItem(
+                            "altrad_survey_training",
+                            "true"
+                          );
                           setCompleted(true);
                         })
                         .catch((err) => {
                           console.error("Erro ao enviar respostas:", err);
                           alert("Ocorreu um erro ao submeter as respostas.");
+                        })
+                        .finally(() => {
+                          setLoading(false);
                         });
                     }}
                   >
-                    SUBMIT →
+                    {loading ? (
+                      <span className="animate-pulse">A ENVIAR...</span>
+                    ) : (
+                      "SUBMIT →"
+                    )}
                   </button>
                 )}
               </div>
