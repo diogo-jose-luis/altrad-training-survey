@@ -7,6 +7,7 @@ import bg1 from "@/assets/images/bg2.jpg";
 import logo from "@/assets/images/logo.jpg";
 
 export default function SurveyHomePage() {
+  
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
 
   useEffect(() => {

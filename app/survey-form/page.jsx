@@ -21,7 +21,7 @@ export default function WizardSurveyPage() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/perguntas-com-respostas")
+      .get("https://admin.hrl.ao/api/perguntas-com-respostas")
       .then((response) => {
         const formatted = response.data.map((pergunta) => ({
           id: pergunta.id,
@@ -301,7 +301,7 @@ export default function WizardSurveyPage() {
                       }
 
                       axios
-                        .post("http://127.0.0.1:8000/api/submissao-survey-respostas", {
+                        .post("https://admin.hrl.ao/api/submissao-survey-respostas", {
                           respostas: userAnswers,
                         })
                         .then((res) => {
