@@ -306,7 +306,7 @@ export default function WizardSurveyPage() {
 
                       axios
                         .post(
-                          "https://admin.hrl.ao/api/submissao-survey-respostas",
+                          "https://apsm-api.altrad-prezioso.ao/api/submissao-survey-respostas",
                           {
                             respostas: userAnswers,
                           }
