@@ -21,7 +21,7 @@ export default function WizardSurveyPage() {
 
   useEffect(() => {
     axios
-      .get("https://admin.hrl.ao/api/perguntas-com-respostas")
+      .get("https://apsm-api.altrad-prezioso.ao/api/perguntas-com-respostas")
       .then((response) => {
         const formatted = response.data.map((pergunta) => ({
           id: pergunta.id,
